@@ -8,22 +8,22 @@ from django.views.generic.detail import DetailView
 
 class PostListView(ListView):
     queryset = Post.objects.exclude(published_date__exact=None)
-    queryset = queryset.order_by('-published_date')
+    queryset = queryset.order_by("-published_date")
     model = Post
-    template_name = 'blogging/list.html'
+    template_name = "blogging/list.html"
 
 
 class PostDetailView(DetailView):
-
+    queryset = Post.objects.exclude(published_date__exact=None)
     model = Post
-    template_name = 'blogging/detail.html'
+    template_name = "blogging/detail.html"
 
 
 def list_view(request):
     published = Post.objects.exclude(published_date__exact=None)
-    posts = published.order_by('-published_date')
-    template = loader.get_template('blogging/list.html')
-    context = {'posts': posts}
+    posts = published.order_by("-published_date")
+    template = loader.get_template("blogging/list.html")
+    context = {"posts": posts}
     body = template.render(context)
     return HttpResponse(body, content_type="text/html")
 
@@ -34,5 +34,5 @@ def detail_view(request, post_id):
         post = published.get(pk=post_id)
     except Post.DoesNotExist:
         raise Http404
-    context = {'post': post}
-    return render(request, 'blogging/detail.html', context)
+    context = {"post": post}
+    return render(request, "blogging/detail.html", context)

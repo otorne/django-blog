@@ -5,4 +5,5 @@ install:
   - pip install -r requirements.txt
   - python manage.py migrate
 script:
+  - black --check blogging djangoblog polling
   - python manage.py test
