@@ -1,9 +1,9 @@
 language: python
+dist: jammy
 python:
-  - "3.9"
+  - "3.12"
 install:
   - pip install -r requirements.txt
-  - python manage.py migrate
 script:
-  - black --check blogging djangoblog polling
+  - black --check blogging polling djangoblog
   - python manage.py test
