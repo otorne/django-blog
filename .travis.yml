@@ -5,4 +5,5 @@ python:
 install:
   - pip install -r requirements.txt
 script:
+  - black --check blogging polling djangoblog
   - python manage.py test
